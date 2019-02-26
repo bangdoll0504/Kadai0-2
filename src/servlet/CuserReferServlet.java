@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beansdomain.Admin;
+import beansdomain.Cuser;
 
 @WebServlet("/CuserReferServlet")
 public class CuserReferServlet extends HttpServlet {
@@ -30,10 +30,10 @@ public class CuserReferServlet extends HttpServlet {
 		String inputAdminid = request.getParameter("loginid");
 
 		// Shohinドメインクラスをインスタンス化
-		Admin adminbeans = null;
+		Cuser cuserbeans = null;
 		try {
 			// コンストラクタに入力された商品IDを渡して実行。これで、shohinbeansに検索結果が入っている
-			adminbeans = new Admin(inputAdminid);
+			cuserbeans = new Cuser(inputAdminid);
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -43,9 +43,9 @@ public class CuserReferServlet extends HttpServlet {
 		HttpSession sessionadmin = request.getSession(true);
 
 		// そのセッションに商品情報のオブジェクトを格納
-		sessionadmin.setAttribute("Admin", adminbeans);
+		sessionadmin.setAttribute("CUser", cuserbeans);
 
-		if (adminbeans.isExist()) {
+		if (cuserbeans.isExist()) {
 			// 検索した商品IDに対する商品名が存在するなら、商品表示ページへ
 			request.getRequestDispatcher("/cuserresult.jsp").forward(request, response);
 		} else {
